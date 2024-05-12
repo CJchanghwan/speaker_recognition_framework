@@ -154,7 +154,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --initial_model /path/model/save/saved_weight.model \
 ```
 
-- Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with InfoNCE  :
+- Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with AAM-InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
