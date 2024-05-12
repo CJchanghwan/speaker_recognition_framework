@@ -74,8 +74,8 @@ If you are using our code to extract speaker embeddings, use it like this:
 
  with torch.no_grad():
      speaker_encoder.eval()
-     embedding = speaker_encoder(audio.unsqueeze(0).to(device), False)
-     embedding = F.normalize(embedding, p=2, dim=1)
+     embedding = speaker_encoder(audio.unsqueeze(0).to(device), False) # audio = [B, sampling_rate * second]
+     embedding = F.normalize(embedding, p=2, dim=1) # embedding = [B, 192]
  print(embedding.shape)
 ```
 
