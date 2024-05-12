@@ -16,7 +16,8 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 - ECAPA-TDNN
 - Resnet
 - Tdnn
-- Clip
+- Contrative Language-Image Pretraining(CLIP)
+- Hard Negative Sampling
 
 # Data preparation
 Please follow the official code to perpare your VoxCeleb2 dataset from the 'Data preparation' part in this repository : [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
