@@ -1,8 +1,10 @@
 # Contrastive Speaker Representation Learning with Hard Negative Sampling for Speaker Recognition
 
+# Introduction
+
 This repository provides a PyTorch implementation of speaker recogtnition framework
 ![cssl](cssl.png)
-
+This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie/ecapa-tdnn)
 # Dependencies
 
 - Python3
@@ -35,6 +37,5 @@ Dataset for test usage:
 
 3. Voxceleb1-H
 
-This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie/ecapa-tdnn)
 
 # Pre-trained models
