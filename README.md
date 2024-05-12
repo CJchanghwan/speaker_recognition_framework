@@ -43,7 +43,7 @@ Dataset for test usage:
 We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Extract speaker embedding
-    ```python
+   
     import model
     import torch
     import torch, sys, os, tqdm, numpy, soundfile, time, pickle
@@ -73,7 +73,11 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
         embedding = speaker_encoder(audio.unsqueeze(0).to(device), False)
         embedding = F.normalize(embedding, p=2, dim=1)
     print(embedding.shape)
-    '''    
+
+```python
+print("Hello, World!")
+```
+
 
 # Training 
 
