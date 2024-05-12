@@ -44,7 +44,7 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
 
 # Training 
 
-you must change the data path in the '''trainECAPAModel.py'''
+you must change the data path in the > trainECAPAModel.py
 
 
     !CUDA_VISIBLE_DEVICES=1 python trainECAPAModel.py \
