@@ -57,4 +57,21 @@ you must change the data path in the trainECAPAModel.py
         --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
 
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
+The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
+
+# Inferencing
+
+The following is a usage of performing performance evaluation of EER and min-dcf. In the case of --snorm, AS-Norm is performed.
+
+    !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+        --eval \
+        #--snorm \ 
+        --sampling_rate 16000 \
+        --eval_list /path/veri_test2.txt \
+        #--train_list /path/train_vox2.txt \
+        #--train_path /path/dev/aac/ \
+        --initial_model /path/model/save/saved_weight.model
+
+With AS-norm, this system performs EER: 0.86. We will not update this code recently since no enough time for this work. I suggest you the following paper if you want to add AS-norm or other norm methods:
+In the case of AS-Norm, it takes a lot of time, and in our case, it took more than 24 hours on Nvidia A5000.
 
