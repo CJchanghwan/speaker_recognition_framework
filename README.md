@@ -116,13 +116,13 @@ you must change the data path in the trainECAPAModel.py
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-    --sampling_rate sampling rate \ # audio resampling
-    --eval_list /path/veri_test2.txt \ # validation dataset path
-    --save_path /path/model/save/directory \ # model save path
-    --mode blip \ # training method(classifier, clip, blip)
-    --loss aam_infonce \ # loss function(infonce, aam_infonce)
-    --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
-    --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
+--sampling_rate sampling rate \ # audio resampling
+--eval_list /path/veri_test2.txt \ # validation dataset path
+--save_path /path/model/save/directory \ # model save path
+--mode blip \ # training method(classifier, clip, blip)
+--loss aam_infonce \ # loss function(infonce, aam_infonce)
+--model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
+--initial_model /path/model/save/saved_weight.model \# load pretrainned weight
 '''
     
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
@@ -132,38 +132,38 @@ Example of classification approach ECAPA-TDNN with AAM-Softmax :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-       --sampling_rate 16000 \
-       --eval_list /path/veri_test2.txt \
-       --save_path /path/model/save/directory \ 
-       --mode classifier \
-       --model ecapa-tdnn \
-       --initial_model /path/model/save/saved_weight.model \
+--sampling_rate 16000 \
+--eval_list /path/veri_test2.txt \
+--save_path /path/model/save/directory \ 
+--mode classifier \
+--model ecapa-tdnn \
+--initial_model /path/model/save/saved_weight.model \
 '''
 
 Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
 
 '''bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-        --sampling_rate 16000 \
-        --eval_list /path/veri_test2.txt \
-        --save_path /path/model/save/directory \ 
-        --mode clip \
-        --loss infonce \ 
-        --model ecapa-tdnn \
-        --initial_model /path/model/save/saved_weight.model \
+--sampling_rate 16000 \
+--eval_list /path/veri_test2.txt \
+--save_path /path/model/save/directory \ 
+--mode clip \
+--loss infonce \ 
+--model ecapa-tdnn \
+--initial_model /path/model/save/saved_weight.model \
 '''
 
 Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
 
 '''bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-        --sampling_rate 16000 \
-        --eval_list /path/veri_test2.txt \
-        --save_path /path/model/save/directory \ 
-        --mode blip \
-        --loss aam_infonce \ 
-        --model ecapa-tdnn \
-        --initial_model /path/model/save/saved_weight.model \
+--sampling_rate 16000 \
+--eval_list /path/veri_test2.txt \
+--save_path /path/model/save/directory \ 
+--mode blip \
+--loss aam_infonce \ 
+--model ecapa-tdnn \
+--initial_model /path/model/save/saved_weight.model \
 '''
          
 # Inference
