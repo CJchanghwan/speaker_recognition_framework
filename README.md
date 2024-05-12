@@ -42,6 +42,39 @@ Dataset for test usage:
 
 We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
+# Extract speaker embedding
+
+    import model
+    import torch
+    import torch, sys, os, tqdm, numpy, soundfile, time, pickle
+    import torchaudio.transforms as T
+    import torch.nn.functional as F
+    
+    use_cuda = torch.cuda.is_available() and True
+    device = torch.device("cuda" if use_cuda else "cpu")
+    
+    speaker_encoder = model.ECAPA_TDNN(512, 16000).to(device)
+    
+    loaded_state = torch.load('/path/ecapa-tdnn.model')
+    self_state = speaker_encoder.state_dict()
+    new_state_dict = {name.replace("speaker_encoder.", ""): param for name, param in loaded_state.items()}
+    new_state_dict.pop('speaker_loss.weight')
+    
+    speaker_encoder.load_state_dict(new_state_dict)
+    sampling_rate = 16000
+    audio_path = '/workspace/data/chgo/voxceleb_code/wav/id10530/pvAnCk52wRw/00003.wav'
+    audio, sr  = soundfile.read(os.path.join(audio_path))
+    
+    audio = torch.FloatTensor(audio)
+    resampler = T.Resample(sr, sampling_rate, dtype=audio.dtype)
+    audio = resampler(audio)
+    with torch.no_grad():
+        speaker_encoder.eval()
+        embedding = speaker_encoder(audio.unsqueeze(0).to(device), False)
+        embedding = F.normalize(embedding, p=2, dim=1)
+    print(embedding.shape)
+    
+
 # Training 
 
 you must change the data path in the trainECAPAModel.py
