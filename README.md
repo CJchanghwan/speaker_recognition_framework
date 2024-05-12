@@ -1,7 +1,7 @@
 # Contrastive Speaker Representation Learning with Hard Negative Sampling for Speaker Recognition
 
 This repository provides a PyTorch implementation of speaker recogtnition framework
-!(cssl.png)
+![cssl](images/cssl.png)
 
 # Dependencies
 
