@@ -76,6 +76,36 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
  print(embedding.shape)
 ```
 
+# Cosine similarity between speaker embeddings
+```python
+sampling_rate = 16000
+audio_path1 = 'audio path1'
+audio_path2 = 'audio path2'
+
+audio1, sr  = soundfile.read(os.path.join(audio_path1))
+audio2, sr  = soundfile.read(os.path.join(audio_path2))
+
+audio1 = torch.FloatTensor(audio1)
+resampler = T.Resample(sr, sampling_rate, dtype=audio.dtype)
+audio1 = resampler(audio1)
+
+audio2 = torch.FloatTensor(audio2)
+resampler = T.Resample(sr, sampling_rate, dtype=audio.dtype)
+audio2 = resampler(audio2)
+
+with torch.no_grad():
+    speaker_encoder.eval()
+    embedding_11 = speaker_encoder(audio1.unsqueeze(0).to(device), False)
+    embedding_11 = F.normalize(embedding_11, p=2, dim=1)
+    
+    embedding_21 = speaker_encoder(audio2.unsqueeze(0).to(device), False)
+    embedding_21 = F.normalize(embedding_21, p=2, dim=1)
+
+score = F.cosine_similarity(embedding_11.to(device), embedding_21.to(device))
+
+print(score)
+```
+
 # Training 
 
 you must change the data path in the trainECAPAModel.py
