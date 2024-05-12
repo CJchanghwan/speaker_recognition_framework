@@ -4,17 +4,19 @@ This repository provides a PyTorch implementation of speaker recogtnition framew
 
 # Dependencies
 
--Python3
--Numpy
--PyTorch
--librosa
--tqdm
--torchaudio
--ECAPA-TDNN
--Resnet
--Tdnn
--Clip
+- Python3
+- Numpy
+- PyTorch
+- librosa
+- tqdm
+- torchaudio
+- ECAPA-TDNN
+- Resnet
+- Tdnn
+- Clip
 
-#Pre-trained models
+This repository is modified based on : https://github.com/taoruijie/ecapa-tdnn
+
+# Pre-trained models
 
 This repository is modified based on : https://github.com/taoruijie/ecapa-tdnn
