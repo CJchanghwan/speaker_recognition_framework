@@ -68,6 +68,7 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
  audio = torch.FloatTensor(audio)
  resampler = T.Resample(sr, sampling_rate, dtype=audio.dtype)
  audio = resampler(audio)
+
  with torch.no_grad():
      speaker_encoder.eval()
      embedding = speaker_encoder(audio.unsqueeze(0).to(device), False)
