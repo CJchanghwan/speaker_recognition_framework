@@ -44,13 +44,12 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
 
 # Training 
 
-'''python
-!CUDA_VISIBLE_DEVICES=1 python trainECAPAModel.py \
-    --sampling_rate 16000 \
-    --eval_list /workspace/data/chgo/veri_test2.txt\
-    --save_path /workspace/data/chgo/exps8k/exp1\
-    --mode blip \
-    --loss aam_infonce \
-    --model tdnn
-    #--initial_model /workspace/data/chgo/voxceleb_code/ECAPA-TDNN-main_8k/exps/
-'''
+    !CUDA_VISIBLE_DEVICES=1 python trainECAPAModel.py \
+        --sampling_rate 16000 \
+        --eval_list /workspace/data/chgo/veri_test2.txt\
+        --save_path /workspace/data/chgo/exps8k/exp1\
+        --mode blip \
+        --loss aam_infonce \
+        --model tdnn
+        --initial_model /workspace/data/chgo/voxceleb_code/ECAPA-TDNN-main_8k/exps/
+
