@@ -15,8 +15,6 @@ This repository provides a PyTorch implementation of speaker recogtnition framew
 - Tdnn
 - Clip
 
-This repository is modified based on : https://github.com/taoruijie/ecapa-tdnn
+This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie/ecapa-tdnn)
 
 # Pre-trained models
-
-This repository is modified based on : https://github.com/taoruijie/ecapa-tdnn
