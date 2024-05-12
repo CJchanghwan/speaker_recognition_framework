@@ -123,7 +123,7 @@ you must change the data path in the trainECAPAModel.py
     --loss aam_infonce \ # loss function(infonce, aam_infonce)
     --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
     --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
-'''
+    '''
 
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
 The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
