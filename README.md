@@ -139,3 +139,10 @@ The following is a usage of performing performance evaluation of EER and min-dcf
 With AS-norm, this system performs EER: 0.86. We will not update this code recently since no enough time for this work. I suggest you the following paper if you want to add AS-norm or other norm methods:
 In the case of AS-Norm, it takes a lot of time, and in our case, it took more than 24 hours on Nvidia A5000.
 
+# Acknowledge
+Thanks to the following projects:
+
+[voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer)
+[ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+
+This work was partially supported by the Institute of Information & Communications Technology Planning & Evaluation (IITP) grant funded by the Korean government (MSIT) (No. 2022-0-00963, Localization Technology Development on Spoken Language Synthesis and Translation of OTT Media Content), and by a research fund from Chosun University, 2023
