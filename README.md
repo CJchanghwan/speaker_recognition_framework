@@ -39,3 +39,5 @@ Dataset for test usage:
 
 
 # Pre-trained models
+
+We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
