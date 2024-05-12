@@ -128,7 +128,7 @@ you must change the data path in the `trainECAPAModel.py`
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
 The result will be saved in `/path/model/save/directory/score.txt` The model will saved in `/path/model/save/model`
 
-Example of `classification approach` ECAPA-TDNN with AAM-Softmax :
+- Example of `classification approach` ECAPA-TDNN with AAM-Softmax :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
@@ -140,7 +140,7 @@ Example of `classification approach` ECAPA-TDNN with AAM-Softmax :
     --initial_model /path/model/save/saved_weight.model \
 ```
 
-Example of `constrastive learning approach(CLIP)` training ECAPA-TDNN with InfoNCE  :
+- Example of `constrastive learning approach(CLIP)` training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
@@ -153,7 +153,7 @@ Example of `constrastive learning approach(CLIP)` training ECAPA-TDNN with InfoN
     --initial_model /path/model/save/saved_weight.model \
 ```
 
-Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with InfoNCE  :
+- Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
