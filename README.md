@@ -56,3 +56,5 @@ you must change the data path in the trainECAPAModel.py
         --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
         --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
 
+This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach (CLIP, BLIP).        
+
