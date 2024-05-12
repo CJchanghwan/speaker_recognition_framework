@@ -114,7 +114,7 @@ print(score)
 
 you must change the data path in the trainECAPAModel.py
 
-'''sh
+```sh
 CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 --sampling_rate sampling rate \ # audio resampling
 --eval_list /path/veri_test2.txt \ # validation dataset path
@@ -123,7 +123,7 @@ CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 --loss aam_infonce \ # loss function(infonce, aam_infonce)
 --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
 --initial_model /path/model/save/saved_weight.model \ # load pretrained weight
-'''
+```
     
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
 The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
@@ -138,11 +138,11 @@ Example of classification approach ECAPA-TDNN with AAM-Softmax :
 --mode classifier \
 --model ecapa-tdnn \
 --initial_model /path/model/save/saved_weight.model \
-'''
+```
 
 Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
 
-'''bash
+```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 --sampling_rate 16000 \
 --eval_list /path/veri_test2.txt \
@@ -151,11 +151,11 @@ Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE
 --loss infonce \ 
 --model ecapa-tdnn \
 --initial_model /path/model/save/saved_weight.model \
-'''
+```
 
 Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
 
-'''bash
+```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 --sampling_rate 16000 \
 --eval_list /path/veri_test2.txt \
@@ -164,7 +164,7 @@ Example of constrastive learning approach(with hard negative sampling) training 
 --loss aam_infonce \ 
 --model ecapa-tdnn \
 --initial_model /path/model/save/saved_weight.model \
-'''
+```
          
 # Inference
 
