@@ -38,7 +38,7 @@ Dataset for test usage:
 3. Voxceleb1-H
 
 
-# Pre-trained models
+# Pretrained models
 
 We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
@@ -123,7 +123,7 @@ you must change the data path in the trainECAPAModel.py
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
 The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
 
-# Inferencing
+# Inference
 
 The following is a usage of performing performance evaluation of EER and min-dcf. In the case of --snorm, AS-Norm is performed.
 
