@@ -129,35 +129,35 @@ The result will be saved in /path/model/save/directory/score.txt The model will 
 
 Example of classification approach ECAPA-TDNN with AAM-Softmax :
 
- !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-         --sampling_rate 16000 \
-         --eval_list /path/veri_test2.txt \
-         --save_path /path/model/save/directory \ 
-         --mode classifier \
-         --model ecapa-tdnn \
-         --initial_model /path/model/save/saved_weight.model \
+    !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+            --sampling_rate 16000 \
+            --eval_list /path/veri_test2.txt \
+            --save_path /path/model/save/directory \ 
+            --mode classifier \
+            --model ecapa-tdnn \
+            --initial_model /path/model/save/saved_weight.model \
 
 Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
 
- !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-         --sampling_rate 16000 \
-         --eval_list /path/veri_test2.txt \
-         --save_path /path/model/save/directory \ 
-         --mode clip \
-         --loss infonce \ 
-         --model ecapa-tdnn \
-         --initial_model /path/model/save/saved_weight.model \
+     !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+             --sampling_rate 16000 \
+             --eval_list /path/veri_test2.txt \
+             --save_path /path/model/save/directory \ 
+             --mode clip \
+             --loss infonce \ 
+             --model ecapa-tdnn \
+             --initial_model /path/model/save/saved_weight.model \
 
 Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
 
- !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-         --sampling_rate 16000 \
-         --eval_list /path/veri_test2.txt \
-         --save_path /path/model/save/directory \ 
-         --mode blip \
-         --loss aam_infonce \ 
-         --model ecapa-tdnn \
-         --initial_model /path/model/save/saved_weight.model \
+     !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+             --sampling_rate 16000 \
+             --eval_list /path/veri_test2.txt \
+             --save_path /path/model/save/directory \ 
+             --mode blip \
+             --loss aam_infonce \ 
+             --model ecapa-tdnn \
+             --initial_model /path/model/save/saved_weight.model \
          
 # Inference
 
