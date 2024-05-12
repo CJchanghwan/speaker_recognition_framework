@@ -114,15 +114,16 @@ print(score)
 
 you must change the data path in the trainECAPAModel.py
 
-
-    !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-        --sampling_rate sampling rate \ # audio resampling
-        --eval_list /path/veri_test2.txt \ # validation dataset path
-        --save_path /path/model/save/directory \ # model save path
-        --mode blip \ # training method(classifier, clip, blip)
-        --loss aam_infonce \ # loss function(infonce, aam_infonce)
-        --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
-        --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
+```bash
+!CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+    --sampling_rate sampling rate \ # audio resampling
+    --eval_list /path/veri_test2.txt \ # validation dataset path
+    --save_path /path/model/save/directory \ # model save path
+    --mode blip \ # training method(classifier, clip, blip)
+    --loss aam_infonce \ # loss function(infonce, aam_infonce)
+    --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
+    --initial_model /path/model/save/saved_weight.model \# load pretrainned weight
+'''
 
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
 The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
