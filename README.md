@@ -75,11 +75,6 @@ We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](
  print(embedding.shape)
 ```
 
-```python
-print("Hello, World!")
-```
-
-
 # Training 
 
 you must change the data path in the trainECAPAModel.py
