@@ -128,6 +128,7 @@ This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn)
 The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
 
 Example of classification approach ECAPA-TDNN with AAM-Softmax :
+
  !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
          --sampling_rate 16000 \
          --eval_list /path/veri_test2.txt \
@@ -137,6 +138,7 @@ Example of classification approach ECAPA-TDNN with AAM-Softmax :
          --initial_model /path/model/save/saved_weight.model \
 
 Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
+
  !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
          --sampling_rate 16000 \
          --eval_list /path/veri_test2.txt \
@@ -147,6 +149,7 @@ Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE
          --initial_model /path/model/save/saved_weight.model \
 
 Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
+
  !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
          --sampling_rate 16000 \
          --eval_list /path/veri_test2.txt \
@@ -155,6 +158,7 @@ Example of constrastive learning approach(with hard negative sampling) training 
          --loss aam_infonce \ 
          --model ecapa-tdnn \
          --initial_model /path/model/save/saved_weight.model \
+         
 # Inference
 
 The following is a usage of performing performance evaluation of EER and min-dcf. In the case of --snorm, AS-Norm is performed.
