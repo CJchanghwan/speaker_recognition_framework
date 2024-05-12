@@ -132,52 +132,54 @@ Example of classification approach ECAPA-TDNN with AAM-Softmax :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
---sampling_rate 16000 \
---eval_list /path/veri_test2.txt \
---save_path /path/model/save/directory \ 
---mode classifier \
---model ecapa-tdnn \
---initial_model /path/model/save/saved_weight.model \
+    --sampling_rate 16000 \
+    --eval_list /path/veri_test2.txt \
+    --save_path /path/model/save/directory \ 
+    --mode classifier \
+    --model ecapa-tdnn \
+    --initial_model /path/model/save/saved_weight.model \
 ```
 
 Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
---sampling_rate 16000 \
---eval_list /path/veri_test2.txt \
---save_path /path/model/save/directory \ 
---mode clip \
---loss infonce \ 
---model ecapa-tdnn \
---initial_model /path/model/save/saved_weight.model \
+    --sampling_rate 16000 \
+    --eval_list /path/veri_test2.txt \
+    --save_path /path/model/save/directory \ 
+    --mode clip \
+    --loss infonce \ 
+    --model ecapa-tdnn \
+    --initial_model /path/model/save/saved_weight.model \
 ```
 
 Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
---sampling_rate 16000 \
---eval_list /path/veri_test2.txt \
---save_path /path/model/save/directory \ 
---mode blip \
---loss aam_infonce \ 
---model ecapa-tdnn \
---initial_model /path/model/save/saved_weight.model \
+    --sampling_rate 16000 \
+    --eval_list /path/veri_test2.txt \
+    --save_path /path/model/save/directory \ 
+    --mode blip \
+    --loss aam_infonce \ 
+    --model ecapa-tdnn \
+    --initial_model /path/model/save/saved_weight.model \
 ```
          
 # Inference
 
 The following is a usage of performing performance evaluation of EER and min-dcf. In the case of --snorm, AS-Norm is performed.
 
-    !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
-        --eval \
-        #--snorm \ 
-        --sampling_rate 16000 \
-        --eval_list /path/veri_test2.txt \
-        #--train_list /path/train_vox2.txt \
-        #--train_path /path/dev/aac/ \
-        --initial_model /path/model/save/saved_weight.model
+```bash
+!CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+    --eval \
+    #--snorm \ 
+    --sampling_rate 16000 \
+    --eval_list /path/veri_test2.txt \
+    #--train_list /path/train_vox2.txt \
+    #--train_path /path/dev/aac/ \
+    --initial_model /path/model/save/saved_weight.model
+```
 
 With AS-norm, this system performs EER: 0.86. We will not update this code recently since no enough time for this work. I suggest you the following paper if you want to add AS-norm or other norm methods:
 In the case of AS-Norm, it takes a lot of time, and in our case, it took more than 24 hours on Nvidia A5000.
