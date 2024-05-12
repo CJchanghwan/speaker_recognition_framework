@@ -112,10 +112,10 @@ print(score)
 
 # Training 
 
-you must change the data path in the trainECAPAModel.py
+you must change the data path in the `trainECAPAModel.py`
 
 ```sh
-CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
+!CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 --sampling_rate sampling rate \ # audio resampling
 --eval_list /path/veri_test2.txt \ # validation dataset path
 --save_path /path/model/save/directory \ # model save path
@@ -126,9 +126,9 @@ CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
 ```
     
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
-The result will be saved in /path/model/save/directory/score.txt The model will saved in /path/model/save/model
+The result will be saved in `/path/model/save/directory/score.txt` The model will saved in `/path/model/save/model`
 
-Example of classification approach ECAPA-TDNN with AAM-Softmax :
+Example of `classification approach` ECAPA-TDNN with AAM-Softmax :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
@@ -140,7 +140,7 @@ Example of classification approach ECAPA-TDNN with AAM-Softmax :
     --initial_model /path/model/save/saved_weight.model \
 ```
 
-Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE  :
+Example of `constrastive learning approach(CLIP)` training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
@@ -153,7 +153,7 @@ Example of constrastive learning approach(CLIP) training ECAPA-TDNN with InfoNCE
     --initial_model /path/model/save/saved_weight.model \
 ```
 
-Example of constrastive learning approach(with hard negative sampling) training ECAPA-TDNN with InfoNCE  :
+Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with InfoNCE  :
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
@@ -168,7 +168,7 @@ Example of constrastive learning approach(with hard negative sampling) training 
          
 # Inference
 
-The following is a usage of performing performance evaluation of EER and min-dcf. In the case of --snorm, AS-Norm is performed.
+The following is a usage of performing performance evaluation of EER and min-dcf. In the case of `--snorm`, AS-Norm is performed.
 
 ```bash
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
