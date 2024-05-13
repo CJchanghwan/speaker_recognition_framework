@@ -182,7 +182,7 @@ The following is a usage of performing performance evaluation of EER and min-dcf
     --initial_model /path/model/save/saved_weight.model
 ```
 
-With AS-norm, this system performs EER: 0.86. We will not update this code recently since no enough time for this work. I suggest you the following paper if you want to add AS-norm or other norm methods:
+With AS-Norm, this system performs EER: 0.86. We will not update this code recently since no enough time for this work. I suggest you the following paper if you want to add AS-norm or other norm methods:
 In the case of AS-Norm, it takes a lot of time, and in our case, it took more than 24 hours on Nvidia A5000.
 
 # Acknowledge
