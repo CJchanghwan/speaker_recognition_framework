@@ -16,7 +16,7 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 - ECAPA-TDNN
 - Resnet
 - Tdnn
-- Contrative Language-Image Pretraining(CLIP)
+- Contrative Language-Image Pretraining (CLIP)
 - Hard Negative Sampling
 
 # Data preparation
