@@ -32,11 +32,11 @@ Dataset for training usage:
 
 Dataset for test usage:
 
-1. Voxceleb1-O
+1. VoxCeleb1-O
 
-2. Voxceleb1-E
+2. VoxCeleb1-E
 
-3. Voxceleb1-H
+3. VoxCeleb1-H
 
 
 # Pretrained model
@@ -176,7 +176,7 @@ The following is a usage of performing performance evaluation of EER and min-dcf
     --eval \
     #--snorm \ 
     --sampling_rate 16000 \
-    --eval_list /path/veri_test2.txt \
+    --eval_list /path/list_test_all2.txt \
     #--train_list /path/train_vox2.txt \
     #--train_path /path/dev/aac/ \
     --initial_model /path/model/save/saved_weight.model
