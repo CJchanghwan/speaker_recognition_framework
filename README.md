@@ -128,7 +128,7 @@ you must change the data path in the `trainECAPAModel.py`
     --save_path /path/model/save/directory \ # model save path
     --mode blip \ # training method(classifier, clip, blip)
     --loss aam_infonce \ # loss function(infonce, aam_infonce)
-    --model tdnn \ # model(ECAPA-TDNN, Resnet, Tdnn)
+    --model tdnn \ # model(ECAPA-TDNN, Resnet18,Resnet34,Resnet50,Resnet101,Resnet152,Resnet221,Resnet293), Tdnn)
     --initial_model /path/model/save/saved_weight.model \ # load pretrained weight
 ```
     
