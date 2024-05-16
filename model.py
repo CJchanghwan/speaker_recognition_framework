@@ -4,7 +4,7 @@ import torch.nn.functional as F
 import torchaudio.transforms as T
 from WavLM import WavLM, WavLMConfig
 
-checkpoint = torch.load('/workspace/data/chgo/voxceleb_code/ECAPA-TDNN-main-blip/WavLM-Large.pt')
+checkpoint = torch.load('/your/path/WavLM-Large.pt')
 cfg = WavLMConfig(checkpoint['cfg'])
 
 
