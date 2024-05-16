@@ -19,6 +19,10 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 - Contrative Language-Image Pretraining (CLIP)
 - Hard Negative Sampling
 
+# Pretrained model
+
+We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)` and `WavLM`: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+
 # Preparation
 Please follow the official code to perpare your VoxCeleb2 dataset from the 'Data preparation' part in this repository : [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
 
@@ -44,10 +48,6 @@ Before using the code, download `WavLM-Large.pt` from the `Pretrained model` sec
 checkpoint = torch.load('/your/path/WavLM-Large.pt')
 cfg = WavLMConfig(checkpoint['cfg'])
 ```
-
-# Pretrained model
-
-We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)` and `WavLM`: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Extract speaker embedding
 If you are using our code to extract speaker embeddings, use it like this:
