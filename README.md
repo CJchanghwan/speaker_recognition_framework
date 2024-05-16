@@ -128,7 +128,7 @@ you must change the data path in the `trainECAPAModel.py`
     --save_path /path/model/save/directory \ # model save path
     --mode blip \ # training method(classifier, clip, blip)
     --loss aam_infonce \ # loss function(infonce, aam_infonce)
-    --model tdnn \ # model(ECAPA-TDNN, Resnet18,Resnet34,Resnet50,Resnet101,Resnet152,Resnet221,Resnet293), Tdnn)
+    --model ecapa-tdnn \ # model(ecapa-tdnn, resnet18, resnet34, resnet50, resnet101, resnet152, resnet221, resnet293, tdnn)
     --initial_model /path/model/save/saved_weight.model \ # load pretrained weight
 ```
     
@@ -144,7 +144,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --save_path /path/model/save/directory \ 
     --mode classifier \
     --model ecapa-tdnn \
-    --initial_model /path/model/save/saved_weight.model \
+    --initial_model /path/model/save/initial_weight.model \
 ```
 
 - Example of `constrastive learning approach(CLIP)` training ECAPA-TDNN with InfoNCE  :
@@ -157,7 +157,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --mode clip \
     --loss infonce \ 
     --model ecapa-tdnn \
-    --initial_model /path/model/save/saved_weight.model \
+    --initial_model /path/model/save/initial_weight.model \
 ```
 
 - Example of `constrastive learning approach(with hard negative sampling)` training ECAPA-TDNN with AAM-InfoNCE  :
@@ -170,7 +170,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --mode blip \
     --loss aam_infonce \ 
     --model ecapa-tdnn \
-    --initial_model /path/model/save/saved_weight.model \
+    --initial_model /path/model/save/initial_weight.model \
 ```
          
 # Inferencing
