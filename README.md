@@ -19,7 +19,7 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 - Contrative Language-Image Pretraining (CLIP)
 - Hard Negative Sampling
 
-# Data preparation
+# Preparation
 Please follow the official code to perpare your VoxCeleb2 dataset from the 'Data preparation' part in this repository : [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
 
 Dataset for training usage:
@@ -38,6 +38,10 @@ Dataset for test usage:
 
 3. VoxCeleb1-H
 
+Before using the code, download WavLM-Large.pt from the `Pretrained model` section below and set it in `model.py` as follows: 
+
+checkpoint = torch.load('/your/path/WavLM-Large.pt')
+cfg = WavLMConfig(checkpoint['cfg'])
 
 # Pretrained model
 
