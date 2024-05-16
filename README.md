@@ -189,4 +189,5 @@ Thanks to the following projects:
 - [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer)
 - [ECAPA-TDNN](https://github.com/taoruijie/ecapa-tdnn)
 - [WavLM](https://github.com/microsoft/unilm/tree/master/wavlm)
+
 This work was partially supported by the Institute of Information & Communications Technology Planning & Evaluation (IITP) grant funded by the Korean government (MSIT) (No. 2022-0-00963, Localization Technology Development on Spoken Language Synthesis and Translation of OTT Media Content), and by a research fund from Chosun University, 2023
