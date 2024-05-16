@@ -203,50 +203,13 @@ class ECAPA_TDNN(nn.Module):
         x = self.bn6(x)
         return x
             
-    def itm(self, x, y, aug):
+    def itm(self, x, y):
         
         attn, _ = self.attn(y,x,x)
         x = x + attn
         x = F.relu(x)
         x = self.itm_head(x)
         return x
-    
-    
-class BasicBlock(nn.Module):
-    expansion = 1
-
-    def __init__(self, in_planes, planes, stride=1):
-        super(BasicBlock, self).__init__()
-        self.conv1 = nn.Conv2d(in_planes,
-                               planes,
-                               kernel_size=3,
-                               stride=stride,
-                               padding=1,
-                               bias=False)
-        self.bn1 = nn.BatchNorm2d(planes)
-        self.conv2 = nn.Conv2d(planes,
-                               planes,
-                               kernel_size=3,
-                               stride=1,
-                               padding=1,
-                               bias=False)
-        self.bn2 = nn.BatchNorm2d(planes)
-
-        self.shortcut = nn.Sequential()
-        if stride != 1 or in_planes != self.expansion * planes:
-            self.shortcut = nn.Sequential(
-                nn.Conv2d(in_planes,
-                          self.expansion * planes,
-                          kernel_size=1,
-                          stride=stride,
-                          bias=False), nn.BatchNorm2d(self.expansion * planes))
-
-    def forward(self, x):
-        out = F.relu(self.bn1(self.conv1(x)))
-        out = self.bn2(self.conv2(out))
-        out += self.shortcut(x)
-        out = F.relu(out)
-        return out
 
 
 class BasicBlock(nn.Module):
@@ -487,7 +450,7 @@ class ResNet(nn.Module):
             self.in_planes = planes * block.expansion
         return nn.Sequential(*layers)
     
-    def itm(self, x, y, aug):
+    def itm(self, x, y):
         attn, _ = self.attn(y,x,x)
         x = x + attn
         x = F.relu(x)
@@ -643,7 +606,7 @@ class xvecTDNN(nn.Module):
         x = self.fc3(x)
         return x 
     
-    def itm(self, x, y, aug):
+    def itm(self, x, y):
         
         attn, _ = self.attn(y,x,x)
         x = x + attn
