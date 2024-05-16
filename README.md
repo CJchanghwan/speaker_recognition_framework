@@ -47,7 +47,7 @@ cfg = WavLMConfig(checkpoint['cfg'])
 
 # Pretrained model
 
-We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)`: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)` and `WavLM`: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Extract speaker embedding
 If you are using our code to extract speaker embeddings, use it like this:
