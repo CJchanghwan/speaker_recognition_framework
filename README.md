@@ -41,7 +41,7 @@ Dataset for test usage:
 
 # Pretrained model
 
-We provide the following pre-trained ECAPA-TDNN: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)`: [ECAPA-TDNN_pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Extract speaker embedding
 If you are using our code to extract speaker embeddings, use it like this:
@@ -167,7 +167,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --initial_model /path/model/save/saved_weight.model \
 ```
          
-# Inference
+# Inferencing
 
 The following is a usage of performing performance evaluation of EER and min-dcf. In the case of `--snorm`, AS-Norm is performed.
 
