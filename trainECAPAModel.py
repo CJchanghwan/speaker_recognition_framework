@@ -51,31 +51,9 @@ args = init_args(args)
 
 ## Define the data loader
 trainloader = train_loader(**vars(args))
+train_sampler = train_dataset_sampler(trainloader, **vars(args))
 
-from torch.utils.data import Subset, Dataset, DataLoader
-from torchsampler.imbalanced import ImbalancedDatasetSampler
-
-train_subsampler = ImbalancedDatasetSampler(trainloader)
-
-def pad_sequence(sequences, batch_first=False, padding_value=0):
-
-    audio_padded_sequences = []
-    audio_padded2_sequences = []
-    target_padded_sequences = []
-    
-    for i, seq in enumerate(sequences):
-        if seq[2] not in target_padded_sequences:
-            audio_padded_sequences.append(seq[0])
-            audio_padded2_sequences.append(seq[1])
-            target_padded_sequences.append(seq[2])
-            if len(target_padded_sequences) == 200:
-                break
-    audio_padded_sequences= torch.stack(audio_padded_sequences,dim=0)
-    audio_padded2_sequences= torch.stack(audio_padded2_sequences,dim=0)
-          
-    return audio_padded_sequences, audio_padded2_sequences, torch.LongTensor(target_padded_sequences)
-
-trainLoader = torch.utils.data.DataLoader(trainloader, batch_size = args.batch_size, shuffle = True, num_workers = args.n_cpu, drop_last = True, collate_fn=lambda x: pad_sequence(x, batch_first=True))
+trainLoader = torch.utils.data.DataLoader(trainloader, batch_size = args.batch_size, shuffle = False, sampler = train_sampler, num_workers = args.n_cpu, drop_last = True)
 
 ## Search for the exist models
 modelfiles = glob.glob('%s/model_0*.model'%args.model_save_path)
