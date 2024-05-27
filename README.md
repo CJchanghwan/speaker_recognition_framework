@@ -45,7 +45,6 @@ Dataset for test usage:
 If you want WavLM feature, download `WavLM-Large.pt` from the `Pretrained model` section below and set it in `model.py` as follows: 
 
 ```python
-
 # Example of extracting WavLM features within a specific model :
 
 checkpoint = torch.load('/your/path/WavLM-Large.pt')
@@ -64,8 +63,8 @@ class model(nn.Module):
             #x = torch.nn.functional.layer_norm(x , x.shape)
             rep, layer_results = self.wavlm.extract_features(x, output_layer=self.wavlm.cfg.encoder_layers, ret_layer_results=True)[0]
             x = [x.permute(1,2,0) for x, _ in layer_results]
-            x = sum(w * output for w, output in zip(self.layer_weights, x))
-       
+            x = sum(w * output for w, output in zip(self.layer_weights, x)) #x.shape : (Batch, Frame_bin, Frequency_bin)
+        # x is the WAVLM feature, and then input it into the model.
 ```
 
 # Extract speaker embedding
