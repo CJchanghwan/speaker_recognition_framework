@@ -4,8 +4,8 @@ import torch.nn.functional as F
 import torchaudio.transforms as T
 from WavLM import WavLM, WavLMConfig
 
-#checkpoint = torch.load('/your/path/WavLM-Large.pt')
-#cfg = WavLMConfig(checkpoint['cfg'])
+checkpoint = torch.load('/your/path/WavLM-Large.pt')
+cfg = WavLMConfig(checkpoint['cfg'])
 
 
 class SEModule(nn.Module):
@@ -170,20 +170,12 @@ class ECAPA_TDNN(nn.Module):
         #self.layer_weights = nn.Parameter(torch.ones(25))
 
     def forward(self, x, aug):
-        # if you want to use wavlm feature : usage like under code
-        '''
+
         with torch.no_grad():
             #x = torch.nn.functional.layer_norm(x , x.shape)
             rep, layer_results = self.wavlm.extract_features(x, output_layer=self.wavlm.cfg.encoder_layers, ret_layer_results=True)[0]
             x = [x.permute(1,2,0) for x, _ in layer_results]
         x = sum(w * output for w, output in zip(self.layer_weights, x))
-        ''' 
-        with torch.no_grad():
-            x = self.torchfbank(x)+1e-6
-            x = x.log()   
-            x = x - torch.mean(x, dim=-1, keepdim=True)
-            if aug == True:
-                x = self.specaug(x)
 
         x = self.conv1(x)
         x = self.relu(x)
