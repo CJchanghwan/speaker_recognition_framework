@@ -1,7 +1,3 @@
-'''
-This part is used to train the speaker model and evaluate the performances
-'''
-
 import torch, sys, os, tqdm, numpy, soundfile, time, pickle
 import torch.nn as nn
 from tools import *
@@ -16,7 +12,7 @@ class ECAPAModel(nn.Module):
         super(ECAPAModel, self).__init__()
 
         self.sampling_rate =  sampling_rate    
-        if model == 'ecapa_tdnn':
+        if model == 'ecapa-tdnn':
             self.speaker_encoder = ECAPA_TDNN(C = 512, sampling_rate = self.sampling_rate).cuda()
             if loss == 'infonce':
                 self.speaker_loss    = LossFunction(192,5994,'infonce').cuda() 
@@ -24,56 +20,8 @@ class ECAPAModel(nn.Module):
                 self.speaker_loss    = LossFunction(192,5994,'aam_infonce').cuda() 
             elif mode == 'classifier':
                 self.speaker_loss = AAMsoftmax(5994,0.2,30, 192).cuda()
-        elif model == 'resnet18':
-            self.speaker_encoder = ResNet18(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet34':
+        elif model == 'resnet':
             self.speaker_encoder = ResNet34(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet50':
-            self.speaker_encoder = ResNet50(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet101':
-            self.speaker_encoder = ResNet101(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet152':
-            self.speaker_encoder = ResNet152(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet221':
-            self.speaker_encoder = ResNet221(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
-            if loss == 'infonce':
-                self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
-            elif loss == 'aam_infonce':
-                self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
-            elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
-        elif model == 'resnet293':
-            self.speaker_encoder = ResNet293(feat_dim=80, embed_dim=256, pooling_func='MQMHASTP').cuda()
             if loss == 'infonce':
                 self.speaker_loss    = LossFunction(256,5994,'infonce').cuda() 
             elif loss == 'aam_infonce':
@@ -87,7 +35,10 @@ class ECAPAModel(nn.Module):
             elif loss == 'aam_infonce':
                 self.speaker_loss    = LossFunction(256,5994,'aam_infonce').cuda() 
             elif mode == 'classifier':
-                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()
+                self.speaker_loss = AAMsoftmax(5994,0.2,30, 256).cuda()      
+        elif model == 'vanila-ecapa-tdnn':
+            self.speaker_encoder = VANILA_ECAPA_TDNN(C = 1024).cuda()
+            self.speaker_loss = AAMsoftmax(5994,0.2,30, 192).cuda()
         print("Margin :", m)        
         self.optim           = torch.optim.AdamW(self.speaker_encoder.parameters(), lr = lr, weight_decay = 2e-5)
         self.optim_loss           = torch.optim.AdamW(self.speaker_loss.parameters(), lr = lr, weight_decay = 2e-5)
@@ -101,6 +52,7 @@ class ECAPAModel(nn.Module):
         self.scheduler2.step(epoch - 1)
         index, top1, loss = 0, 0, 0
         lr = self.optim.param_groups[0]['lr']
+        
         for num, (data, labels) in enumerate(loader, start = 1):
             self.optim.zero_grad()
             self.optim_loss.zero_grad()
