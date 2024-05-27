@@ -183,6 +183,7 @@ The following is a usage of performing performance evaluation of EER and min-dcf
     #--snorm \ 
     --sampling_rate 16000 \
     --eval_list /path/list_test_all2.txt \
+    --model your_model \
     #--train_list /path/train_vox2.txt \
     #--train_path /path/dev/aac/ \
     --initial_model /path/model/save/saved_weight.model
