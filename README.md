@@ -21,7 +21,7 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 
 # Pretrained model
 
-We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)` or `ECAPA-TDNN(trained with AAMSoftmax)`and if you want use wavLM download : `WavLM`: [pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+We provide the following pre-trained `ECAPA-TDNN(trained with aam-infonce)` or `ECAPA-TDNN(trained with AAMSoftmax)`and if you want use wavLM download : `WavLM` [pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Preparation
 Please follow the official code to perpare your VoxCeleb2 dataset from the 'Data preparation' part in this repository : [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
