@@ -42,7 +42,7 @@ Dataset for test usage:
 
 3. VoxCeleb1-H
 
-If you want WavLM feature, download `WavLM-Large.pt` from the `Pretrained model` section below and set it in `model.py` as follows: 
+If you want to use `WavLM+speaker_encoder`, download `WavLM-Large.pt` from the `Pretrained model` section below and set it in `model.py` as follows: 
 
 ```python
 # Example of extracting WavLM features within a specific model :
