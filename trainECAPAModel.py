@@ -54,9 +54,6 @@ trainloader = train_loader(**vars(args))
 train_sampler = train_dataset_sampler(trainloader, **vars(args))
 
 from torch.utils.data import Subset, Dataset, DataLoader
-from torchsampler.imbalanced import ImbalancedDatasetSampler
-
-train_subsampler = ImbalancedDatasetSampler(trainloader)
 
 def pad_sequence(sequences, batch_first=False, padding_value=0):
 
