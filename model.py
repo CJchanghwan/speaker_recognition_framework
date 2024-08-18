@@ -3,10 +3,98 @@ import math, torch, torchaudio
 import torch.nn as nn
 import torch.nn.functional as F
 import torchaudio.transforms as T
-from WavLM import WavLM, WavLMConfig
 
-checkpoint = torch.load('/workspace/data/chgo/voxceleb_code/ECAPA-TDNN-main-blip/WavLM-Large.pt')
-cfg = WavLMConfig(checkpoint['cfg'])
+class TSTP(nn.Module):
+
+    def __init__(self, in_dim=0, **kwargs):
+        super(TSTP, self).__init__()
+        self.in_dim = in_dim
+
+    def forward(self, x):
+        # The last dimension is the temporal axis
+        pooling_mean = x.mean(dim=-1)
+        pooling_std = torch.sqrt(torch.var(x, dim=-1) + 1e-7)
+        pooling_mean = pooling_mean.flatten(start_dim=1)
+        pooling_std = pooling_std.flatten(start_dim=1)
+        stats = torch.cat((pooling_mean, pooling_std), 1)
+        return stats
+
+    def get_out_dim(self):
+        self.out_dim = self.in_dim * 2
+        return self.out_dim
+
+class MHASTP(torch.nn.Module):
+    """ Multi head attentive statistics pooling
+    Reference:
+        Self Multi-Head Attention for Speaker Recognition
+        https://arxiv.org/pdf/1906.09890.pdf
+    """
+
+    def __init__(self,
+                 in_dim,
+                 layer_num=2,
+                 head_num=8,
+                 d_s=1,
+                 bottleneck_dim=64,
+                 **kwargs):
+        super(MHASTP, self).__init__()
+        assert (in_dim % head_num
+                ) == 0  # make sure that head num can be divided by input_dim
+        self.in_dim = in_dim
+        self.head_num = head_num
+        d_model = int(in_dim / head_num)
+        channel_dims = [bottleneck_dim for i in range(layer_num + 1)]
+        if d_s > 1:
+            d_s = d_model
+        else:
+            d_s = 1
+        self.d_s = d_s
+        channel_dims[0], channel_dims[-1] = d_model, d_s
+        heads_att_trans = []
+        for i in range(self.head_num):
+            att_trans = nn.Sequential()
+            for i in range(layer_num - 1):
+                att_trans.add_module(
+                    'att_' + str(i),
+                    nn.Conv1d(channel_dims[i], channel_dims[i + 1], 1, 1))
+                att_trans.add_module('tanh' + str(i), nn.Tanh())
+            att_trans.add_module(
+                'att_' + str(layer_num - 1),
+                nn.Conv1d(channel_dims[layer_num - 1], channel_dims[layer_num],
+                          1, 1))
+            heads_att_trans.append(att_trans)
+        self.heads_att_trans = nn.ModuleList(heads_att_trans)
+
+    def forward(self, input):
+        """
+        input: a 3-dimensional tensor in xvector architecture
+            or a 4-dimensional tensor in resnet architecture
+            0-dim: batch-dimension, last-dim: time-dimension (frame-dimension)
+        """
+        if len(input.shape) == 4:  # B x F x T
+            input = input.reshape(input.shape[0],
+                                  input.shape[1] * input.shape[2],
+                                  input.shape[3])
+        assert len(input.shape) == 3
+        bs, f_dim, t_dim = input.shape
+        chunks = torch.chunk(input, self.head_num, 1)
+        # split
+        chunks_out = []
+        # for i in range(self.head_num):
+        #     att_score = self.heads_att_trans[i](chunks[i])
+        for i, layer in enumerate(self.heads_att_trans):
+            att_score = layer(chunks[i])
+            alpha = F.softmax(att_score, dim=-1)
+            mean = torch.sum(alpha * chunks[i], dim=2)
+            var = torch.sum(alpha * chunks[i]**2, dim=2) - mean**2
+            std = torch.sqrt(var.clamp(min=1e-7))
+            chunks_out.append(torch.cat((mean, std), dim=1))
+        out = torch.cat(chunks_out, dim=1)
+        return out
+
+    def get_out_dim(self):
+        self.out_dim = 2 * self.in_dim
+        return self.out_dim
 
 class SEModule(nn.Module):
     def __init__(self, channels, bottleneck=128):
@@ -162,20 +250,14 @@ class ECAPA_TDNN(nn.Module):
         self.attn = nn.MultiheadAttention(192, 4, batch_first = True)
         self.itm_head = nn.Linear(192,2)
         self.pool = MHASTP(1536)
-        
-      
-        self.wavlm = WavLM(cfg)
-        self.wavlm.load_state_dict(checkpoint['model'])
-        self.wavlm.eval() 
-        self.layer_weights = nn.Parameter(torch.ones(25))
 
     def forward(self, x, aug):
-
         with torch.no_grad():
-            #x = torch.nn.functional.layer_norm(x , x.shape)
-            rep, layer_results = self.wavlm.extract_features(x, output_layer=self.wavlm.cfg.encoder_layers, ret_layer_results=True)[0]
-            x = [x.permute(1,2,0) for x, _ in layer_results]
-        x = sum(w * output for w, output in zip(self.layer_weights, x))
+            x = self.torchfbank(x)+1e-6
+            x = x.log()   
+            x = x - torch.mean(x, dim=-1, keepdim=True)
+            if aug == True:
+                x = self.specaug(x)
 
         x = self.conv1(x)
         x = self.relu(x)
@@ -355,98 +437,6 @@ class Bottleneck(nn.Module):
         out += self.shortcut(x)
         out = F.relu(out)
         return out
-    
-class TSTP(nn.Module):
-
-    def __init__(self, in_dim=0, **kwargs):
-        super(TSTP, self).__init__()
-        self.in_dim = in_dim
-
-    def forward(self, x):
-        # The last dimension is the temporal axis
-        pooling_mean = x.mean(dim=-1)
-        pooling_std = torch.sqrt(torch.var(x, dim=-1) + 1e-7)
-        pooling_mean = pooling_mean.flatten(start_dim=1)
-        pooling_std = pooling_std.flatten(start_dim=1)
-        stats = torch.cat((pooling_mean, pooling_std), 1)
-        return stats
-
-    def get_out_dim(self):
-        self.out_dim = self.in_dim * 2
-        return self.out_dim
-
-class MHASTP(torch.nn.Module):
-    """ Multi head attentive statistics pooling
-    Reference:
-        Self Multi-Head Attention for Speaker Recognition
-        https://arxiv.org/pdf/1906.09890.pdf
-    """
-
-    def __init__(self,
-                 in_dim,
-                 layer_num=2,
-                 head_num=8,
-                 d_s=1,
-                 bottleneck_dim=64,
-                 **kwargs):
-        super(MHASTP, self).__init__()
-        assert (in_dim % head_num
-                ) == 0  # make sure that head num can be divided by input_dim
-        self.in_dim = in_dim
-        self.head_num = head_num
-        d_model = int(in_dim / head_num)
-        channel_dims = [bottleneck_dim for i in range(layer_num + 1)]
-        if d_s > 1:
-            d_s = d_model
-        else:
-            d_s = 1
-        self.d_s = d_s
-        channel_dims[0], channel_dims[-1] = d_model, d_s
-        heads_att_trans = []
-        for i in range(self.head_num):
-            att_trans = nn.Sequential()
-            for i in range(layer_num - 1):
-                att_trans.add_module(
-                    'att_' + str(i),
-                    nn.Conv1d(channel_dims[i], channel_dims[i + 1], 1, 1))
-                att_trans.add_module('tanh' + str(i), nn.Tanh())
-            att_trans.add_module(
-                'att_' + str(layer_num - 1),
-                nn.Conv1d(channel_dims[layer_num - 1], channel_dims[layer_num],
-                          1, 1))
-            heads_att_trans.append(att_trans)
-        self.heads_att_trans = nn.ModuleList(heads_att_trans)
-
-    def forward(self, input):
-        """
-        input: a 3-dimensional tensor in xvector architecture
-            or a 4-dimensional tensor in resnet architecture
-            0-dim: batch-dimension, last-dim: time-dimension (frame-dimension)
-        """
-        if len(input.shape) == 4:  # B x F x T
-            input = input.reshape(input.shape[0],
-                                  input.shape[1] * input.shape[2],
-                                  input.shape[3])
-        assert len(input.shape) == 3
-        bs, f_dim, t_dim = input.shape
-        chunks = torch.chunk(input, self.head_num, 1)
-        # split
-        chunks_out = []
-        # for i in range(self.head_num):
-        #     att_score = self.heads_att_trans[i](chunks[i])
-        for i, layer in enumerate(self.heads_att_trans):
-            att_score = layer(chunks[i])
-            alpha = F.softmax(att_score, dim=-1)
-            mean = torch.sum(alpha * chunks[i], dim=2)
-            var = torch.sum(alpha * chunks[i]**2, dim=2) - mean**2
-            std = torch.sqrt(var.clamp(min=1e-7))
-            chunks_out.append(torch.cat((mean, std), dim=1))
-        out = torch.cat(chunks_out, dim=1)
-        return out
-
-    def get_out_dim(self):
-        self.out_dim = 2 * self.in_dim
-        return self.out_dim
 
 class ResNet(nn.Module):
 
@@ -549,9 +539,6 @@ class ResNet(nn.Module):
             embed_a = self.seg_bn_1(embed_a)
             embed_b = self.seg_2(embed_a)
         return embed_b
-    
-    
-
 
 def ResNet18(feat_dim, embed_dim, pooling_func='TSTP', two_emb_layer=True):
     return ResNet(BasicBlock, [2, 2, 2, 2],
