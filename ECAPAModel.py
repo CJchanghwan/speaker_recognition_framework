@@ -13,7 +13,7 @@ class ECAPAModel(nn.Module):
 
         self.sampling_rate =  sampling_rate    
         if model == 'ecapa-tdnn':
-            self.speaker_encoder = ECAPA_TDNN(C = 512, sampling_rate = self.sampling_rate).cuda()
+            self.speaker_encoder = ECAPA_TDNN(C = 1024, sampling_rate = self.sampling_rate).cuda()
             if loss == 'infonce':
                 self.speaker_loss    = LossFunction(192,5994,'infonce').cuda() 
             elif loss == 'aam_infonce':
