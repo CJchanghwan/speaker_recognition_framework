@@ -288,7 +288,6 @@ class ECAPAModel(nn.Module):
             sys.stdout.write("\r Reading {:d} of {:d}: {:.2f} Hz, embedding size {:d}".format(idx*gs, ds*gs, idx*gs/telapsed,ref_feat.size()[1]))
             sys.stdout.flush()
 
-        
         feats_coh = {}
         tstart = time.time()
         with open(train_list) as f:
