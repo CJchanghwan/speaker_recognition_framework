@@ -6,10 +6,8 @@ import numpy as np
 import random
 import torchaudio.functional as AF
 
-
 def round_down(num, divisor):
     return num - (num%divisor)
-
 
 def loadWAV(filename, max_frames, sampling_rate,evalmode=True, num_eval=10, **kwargs):
     # Maximum audio length
@@ -20,7 +18,6 @@ def loadWAV(filename, max_frames, sampling_rate,evalmode=True, num_eval=10, **kw
     resampler = T.Resample(sample_rate, sampling_rate, dtype=audio.dtype)
     audio = resampler(audio)
     audio = audio.numpy()
-    
     audiosize = audio.shape[0]
     if audiosize <= max_audio:
         shortage = max_audio - audiosize + 1 
