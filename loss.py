@@ -35,8 +35,7 @@ class AAMsoftmax(nn.Module):
         return loss, prec1
 
 class SubcenterArcMarginProduct(nn.Module):
-    r"""Modified implementation from https://github.com/ronghuaiyang/arcface-pytorch/blob/47ace80b128042cd8d2efd408f55c5a3e156b032/models/metrics.py#L10
-        """
+        
     def __init__(self, in_features, out_features, K=3, s=30.0, m=0.2, easy_margin=False):
         super(SubcenterArcMarginProduct, self).__init__()
         self.in_features = in_features
