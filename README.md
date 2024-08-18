@@ -37,7 +37,6 @@ Dataset for test usage:
 
 3. VoxCeleb1-H
 
-If you want to use `WavLM+speaker_encoder`, download `WavLM-Large.pt` from the `Pretrained model` section below and set it in `model.py` as follows: 
 
 # Extract speaker embedding
 If you are using our code to extract speaker embeddings, use it like this:
