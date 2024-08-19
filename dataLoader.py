@@ -68,7 +68,6 @@ class train_loader(torch.utils.data.Dataset):
         return self.data_label  
 
     def __getitem__(self, index):
-        index = index[0]
         
         speaker1 = self.data_list[index]
 
@@ -401,58 +400,3 @@ class train_dataset_sampler(torch.utils.data.Sampler):
     def set_epoch(self, epoch: int) -> None:
         self.epoch = epoch
         
-class train_classfier(object):
-    def __init__(self, train_list, train_path, musan_path, rir_path, num_frames, sampling_rate, **kwargs):
-        self.train_path = train_path
-        self.num_frames = num_frames
-        self.sampling_rate = sampling_rate
-        self.noisetypes = ['noise','speech','music']
-        self.noisesnr = {'noise':[0,15],'speech':[13,20],'music':[5,15]}
-        self.numnoise = {'noise':[1,1], 'speech':[3,8], 'music':[1,1]}
-        self.noiselist = {}
-        augment_files   = glob.glob(os.path.join(musan_path,'*/*/*/*.wav'))
-        for file in augment_files:
-            if file.split('/')[-4] not in self.noiselist:
-                self.noiselist[file.split('/')[-4]] = []
-            self.noiselist[file.split('/')[-4]].append(file)
-        self.rir_files  = glob.glob(os.path.join(rir_path,'*/*/*.wav'))
-        self.data_list  = []
-        self.data_label = []
-        lines = open(train_list).read().splitlines()
-        dictkeys = list(set([x.split()[0] for x in lines]))
-        dictkeys.sort()
-        dictkeys = { key : ii for ii, key in enumerate(dictkeys) }
-        for index, line in enumerate(lines):
-            speaker_label = dictkeys[line.split()[0]]
-            file_name     = os.path.join(train_path, line.split()[1])
-            self.data_label.append(speaker_label)
-            self.data_list.append(file_name)
-
-    def __getitem__(self, index):
-        audio, sr = soundfile.read(self.data_list[index])
-        audio = torch.FloatTensor(audio)
-        resampler = T.Resample(sr, self.sampling_rate, dtype=audio.dtype)
-        audio = resampler(audio)
-        length = self.num_frames * 80 + 120
-        if audio.shape[0] <= length:
-            shortage = length - audio.shape[0]
-            audio = numpy.pad(audio, (0, shortage), 'wrap')
-        start_frame = numpy.int64(random.random()*(audio.shape[0]-length))
-        audio = audio[start_frame:start_frame + length]
-        audio = numpy.stack([audio],axis=0)
-        augtype = random.randint(0,5)
-        if augtype == 0:   
-            audio = audio
-        elif augtype == 1: 
-            audio = self.add_rev(audio)
-        elif augtype == 2: 
-            audio = self.add_noise(audio, 'speech')
-        elif augtype == 3: 
-            audio = self.add_noise(audio, 'music')
-        elif augtype == 4: 
-            audio = self.add_noise(audio, 'noise')
-        elif augtype == 5: 
-            audio = self.add_noise(audio, 'speech')
-            audio = self.add_noise(audio, 'music')
-
-        return torch.FloatTensor(audio[0]), self.data_label[index]
