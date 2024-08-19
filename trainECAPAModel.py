@@ -29,7 +29,7 @@ parser.add_argument('--eval_list',  type=str,   default="./veri_test.txt",      
 parser.add_argument('--eval_path',  type=str,   default="./wav/",                    help='The path of the evaluation data, eg:"/workspace/data/chgo/wav/" in my case')
 parser.add_argument('--musan_path', type=str,   default="./musan_split",                    help='The path to the MUSAN set, eg:"/data08/Others/musan_split" in my case')
 parser.add_argument('--rir_path',   type=str,   default="./RIRS_NOISES/simulated_rirs",     help='The path to the RIR set, eg:"/data08/Others/RIRS_NOISES/simulated_rirs" in my case');
-parser.add_argument('--save_path',  type=str,   default="./exps/exp1",                                     help='/workspace/data/chgo/tdnn_new.pt')
+parser.add_argument('--save_path',  type=str,   default="./weights",                                     help='/workspace/data/chgo/tdnn_new.pt')
 parser.add_argument('--initial_model',  type=str,   default="",                                          help='Path of the initial_model')
 
 ## Model and Loss settings
