@@ -51,7 +51,7 @@ If you are using our code to extract speaker embeddings, use it like this:
  use_cuda = torch.cuda.is_available() and True
  device = torch.device("cuda" if use_cuda else "cpu")
  
- speaker_encoder = model.ECAPA_TDNN(1024, 16000).to(device)
+ speaker_encoder = model.VANILA_ECAPA_TDNN(1024, 16000).to(device)
  
  loaded_state = torch.load('/path/ecapa-tdnn.model')
  self_state = speaker_encoder.state_dict()
