@@ -23,13 +23,13 @@ parser.add_argument('--distributed',    dest='distributed', action='store_true',
 parser.add_argument('--loss',  type=str, default='infonce', help='Input loss')
 
 ## Training and evaluation path/lists, save path
-parser.add_argument('--train_list', type=str,   default="/workspace/data/chgo/voxceleb_code/ECAPA-TDNN-main/train_list.txt",     help='The path of the training list, https://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/train_list.txt')
-parser.add_argument('--train_path', type=str,   default="/workspace/data/chgo/voxceleb_code/dev/aac/",                    help='The path of the training data, eg:"/data08/VoxCeleb2/train/wav" in my case')
-parser.add_argument('--eval_list',  type=str,   default="/workspace/data/chgo/veri_test.txt",              help='The path of the evaluation list, veri_test2.txt comes from https://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/list_test_all2.txt')
-parser.add_argument('--eval_path',  type=str,   default="/workspace/data/chgo/voxceleb_code/wav/",                    help='The path of the evaluation data, eg:"/workspace/data/chgo/wav/" in my case')
-parser.add_argument('--musan_path', type=str,   default="/workspace/data/chgo/voxceleb_code/musan_split",                    help='The path to the MUSAN set, eg:"/data08/Others/musan_split" in my case')
-parser.add_argument('--rir_path',   type=str,   default="/workspace/data/chgo/voxceleb_code/RIRS_NOISES/simulated_rirs",     help='The path to the RIR set, eg:"/data08/Others/RIRS_NOISES/simulated_rirs" in my case');
-parser.add_argument('--save_path',  type=str,   default="exps/exp1",                                     help='/workspace/data/chgo/tdnn_new.pt')
+parser.add_argument('--train_list', type=str,   default="./train_list.txt",     help='The path of the training list, https://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/train_list.txt')
+parser.add_argument('--train_path', type=str,   default="./dev/aac/",                    help='The path of the training data, eg:"/data08/VoxCeleb2/train/wav" in my case')
+parser.add_argument('--eval_list',  type=str,   default="./veri_test.txt",              help='The path of the evaluation list, veri_test2.txt comes from https://www.robots.ox.ac.uk/~vgg/data/voxceleb/meta/list_test_all2.txt')
+parser.add_argument('--eval_path',  type=str,   default="./wav/",                    help='The path of the evaluation data, eg:"/workspace/data/chgo/wav/" in my case')
+parser.add_argument('--musan_path', type=str,   default="./musan_split",                    help='The path to the MUSAN set, eg:"/data08/Others/musan_split" in my case')
+parser.add_argument('--rir_path',   type=str,   default="./RIRS_NOISES/simulated_rirs",     help='The path to the RIR set, eg:"/data08/Others/RIRS_NOISES/simulated_rirs" in my case');
+parser.add_argument('--save_path',  type=str,   default="./exps/exp1",                                     help='/workspace/data/chgo/tdnn_new.pt')
 parser.add_argument('--initial_model',  type=str,   default="",                                          help='Path of the initial_model')
 
 ## Model and Loss settings
