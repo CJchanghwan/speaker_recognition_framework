@@ -16,7 +16,7 @@ This repository is modified based on : [ECAPA-TDNN](https://github.com/taoruijie
 
 # Pretrained model
 
-We provide the following pre-trained `ECAPA-TDNN(trained with our method)`[pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
+We provide the following pre-trained `ECAPA-TDNN`[pretrained_weight](https://drive.google.com/drive/folders/1cszCCaU2NpIZtliy92VfD0I89Zxn6cNK?usp=drive_link)
 
 # Preparation
 Please follow the official code to prepare your VoxCeleb2 dataset from the 'Data preparation' part in this repository : [voxceleb_trainer](https://github.com/clovaai/voxceleb_trainer).
