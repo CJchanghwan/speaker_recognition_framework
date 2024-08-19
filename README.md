@@ -132,6 +132,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
     --eval_list /path/veri_test2.txt \
     --save_path /path/model/save/directory \ 
     --mode classifier \
+    --loss aamsoftmax \
     --model ecapa-tdnn \
     --initial_model /path/model/save/initial_weight.model \
 ```
