@@ -114,7 +114,7 @@ you must change the data path in the `trainECAPAModel.py`
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
     --sampling_rate sampling rate \ # audio resampling
     --eval_list /path/veri_test2.txt \ # validation dataset path
-    --save_path /path/model/save/directory \ # model save path
+    --save_path ./train_log \ # model save path
     --mode blip \ # training method(classifier, clip, blip)
     --loss aam_infonce \ # loss function(aamsoftmax, infonce, aam_infonce)
     --model ecapa-tdnn \ # model(vanila-ecapa-tdnn(only classifier), ecapa-tdnn, resnet18, resnet34, resnet50, resnet101, resnet152, resnet221, resnet293, tdnn)
@@ -122,7 +122,7 @@ you must change the data path in the `trainECAPAModel.py`
 ```
     
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
-The result will be saved in `/path/model/save/directory/score.txt` The model will saved in `/path/model/save/model`
+The result will be saved in `./train_log/score.txt` The model will saved in `./train_log/model`
 
 - Example of `classification approach` ECAPA-TDNN with AAM-Softmax :
 
@@ -130,7 +130,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
     --sampling_rate 16000 \
     --eval_list /path/veri_test2.txt \
-    --save_path /path/model/save/directory \ 
+    --save_path ./train_log \ 
     --mode classifier \
     --loss aamsoftmax \
     --model ecapa-tdnn \
@@ -143,7 +143,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
     --sampling_rate 16000 \
     --eval_list /path/veri_test2.txt \
-    --save_path /path/model/save/directory \ 
+    --save_path ./train_log \ 
     --mode clip \
     --loss infonce \ 
     --model ecapa-tdnn \
@@ -156,7 +156,7 @@ The result will be saved in `/path/model/save/directory/score.txt` The model wil
 !CUDA_VISIBLE_DEVICES=0 python trainECAPAModel.py \
     --sampling_rate 16000 \
     --eval_list /path/veri_test2.txt \
-    --save_path /path/model/save/directory \ 
+    --save_path ./train_log \ 
     --mode blip \
     --loss aam_infonce \ 
     --model ecapa-tdnn \
