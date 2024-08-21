@@ -118,7 +118,7 @@ you must change the data path in the `trainECAPAModel.py`
     --mode blip \ # training method(classifier, clip, blip)
     --loss aam_infonce \ # loss function(aamsoftmax, infonce, aam_infonce)
     --model ecapa-tdnn \ # model(vanila-ecapa-tdnn(only classifier), ecapa-tdnn, resnet18, resnet34, resnet50, resnet101, resnet152, resnet221, resnet293, tdnn)
-    --initial_model /path/model/save/saved_weight.model \ # load pretrained weight
+    --initial_model /path/model/save/initial_weight.model \ # load initial weight
 ```
     
 This repository provides code to train three models : (ECAPA-TDNN, Resnet, Tdnn) using the classification approach and contrastive learning approach.        
