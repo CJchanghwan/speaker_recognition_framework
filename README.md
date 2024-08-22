@@ -53,7 +53,7 @@ If you are using our code to extract speaker embeddings, use it like this:
  
  speaker_encoder = model.ECAPA_TDNN(1024, 16000).to(device)
  
- loaded_state = torch.load('/path/ecapa-tdnn.model')
+ loaded_state = torch.load('/path/pretrained_model.model')
  self_state = speaker_encoder.state_dict()
  new_state_dict = {name.replace("speaker_encoder.", ""): param for name, param in loaded_state.items()}
  new_state_dict.pop('speaker_loss.weight')
